@@ -20,6 +20,10 @@ local function main_pulse()
 
    Settings.update()
 
+   if not Settings.get().enabled or not Settings.should_execute() then
+      return
+   end
+
    local loot_closest_toggle = GUI.elements.general.loot_closest_toggle:get()
    local loot_best_toggle = GUI.elements.general.loot_best_toggle:get()
 
@@ -30,7 +34,6 @@ local function main_pulse()
       local best_item_data = ItemManager.get_best_item()
       if best_item_data then
          handle_loot(best_item_data.Item)
-
       end
    end
 end
